@@ -21,8 +21,6 @@ fn main() {
                 update_enemy_direction,
             ),
         )
-        // .add_systems(Startup, spawn_audio)
-        // .add_systems(Update, (update_speed, pause, volume))
         .run();
 }
 
