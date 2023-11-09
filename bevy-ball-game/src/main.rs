@@ -49,45 +49,8 @@ pub fn spawn_player(
     ));
 }
 
-//================================================================
-
 #[derive(Component)]
 struct MySound;
-
-pub fn spawn_audio(mut commands: Commands, asset_server: Res<AssetServer>) {
-    commands.spawn((
-        AudioBundle {
-            source: asset_server.load("audio/pluck_001.ogg"),
-            ..default()
-        },
-        MySound,
-    ));
-}
-
-fn update_speed(music_controller: Query<&AudioSink, With<MySound>>, time: Res<Time>) {
-    if let Ok(sink) = music_controller.get_single() {
-        sink.set_speed(((time.elapsed_seconds() / 5.0).sin() + 1.0).max(0.1));
-    }
-}
-
-fn pause(keyboard_input: Res<Input<KeyCode>>, music_controller: Query<&AudioSink, With<MySound>>) {
-    if keyboard_input.just_pressed(KeyCode::Space) {
-        if let Ok(sink) = music_controller.get_single() {
-            sink.toggle();
-        }
-    }
-}
-
-fn volume(keyboard_input: Res<Input<KeyCode>>, music_controller: Query<&AudioSink, With<MySound>>) {
-    if let Ok(sink) = music_controller.get_single() {
-        if keyboard_input.just_pressed(KeyCode::Plus) {
-            sink.set_volume(sink.volume() + 0.1);
-        } else if keyboard_input.just_pressed(KeyCode::Minus) {
-            sink.set_volume(sink.volume() - 0.1);
-        }
-    }
-}
-//================================================================
 
 pub fn spawn_camera(mut commands: Commands, window_query: Query<&Window, With<PrimaryWindow>>) {
     let window: &Window = window_query.get_single().unwrap();
