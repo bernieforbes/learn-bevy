@@ -191,7 +191,6 @@ pub fn update_enemy_direction(
             } else {
                 sound_effect_2
             };
-            // audio.play(sound_effect);
 
             commands.spawn((
                 AudioBundle {
