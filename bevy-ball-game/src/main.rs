@@ -234,7 +234,6 @@ pub fn update_enemy_direction(
 
             commands.spawn((
                 AudioBundle {
-                    // source: asset_server.load("audio/pluck_001.ogg"),
                     source: sound_effect,
                     settings: PlaybackSettings::DESPAWN,
                     ..default()
