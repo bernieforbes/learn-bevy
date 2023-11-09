@@ -187,7 +187,7 @@ pub fn enemy_movement(mut enemy_query: Query<(&mut Transform, &Enemy)>, time: Re
 
 pub fn update_enemy_direction(
     mut commands: Commands,
-    mut enemy_query: Query<(&Transform, &mut Enemy)>,
+    mut enemy_query: Query<(&mut Transform, &mut Enemy)>,
     window_query: Query<&Window, With<PrimaryWindow>>,
     asset_server: Res<AssetServer>,
 ) {
@@ -199,18 +199,34 @@ pub fn update_enemy_direction(
     let y_min = 0.0 + half_enemy_size;
     let y_max = window.height() - half_enemy_size;
 
-    for (transform, mut enemy) in enemy_query.iter_mut() {
+    for (mut transform, mut enemy) in enemy_query.iter_mut() {
         let mut direction_changed = false;
 
-        let translation = transform.translation;
+        let mut translation = transform.translation;
         if translation.x < x_min || translation.x > x_max {
             enemy.direction.x *= -1.0;
             direction_changed = true;
+
+            if translation.x < x_min {
+                translation.x = half_enemy_size;
+            }
+            if translation.x > x_max {
+                translation.x = x_max;
+            }
         }
         if translation.y < y_min || translation.y > y_max {
             enemy.direction.y *= -1.0;
             direction_changed = true;
+
+            if translation.y < y_min {
+                translation.y = half_enemy_size;
+            }
+            if translation.y > y_max {
+                translation.y = y_max;
+            }
         }
+
+        transform.translation = translation;
 
         // Play SFX
         if direction_changed {
