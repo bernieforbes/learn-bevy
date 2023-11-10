@@ -357,6 +357,7 @@ pub fn enemy_hit_player(
                     },
                     MySound,
                 ));
+
                 commands.entity(player_entity).despawn();
             }
         }
