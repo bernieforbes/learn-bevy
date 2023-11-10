@@ -344,6 +344,7 @@ pub fn enemy_hit_player(
                 .distance(enemy_transform.translation);
             let player_radius = PLAYER_SIZE / 2.0;
             let enemy_radius = ENEMY_SIZE / 2.0;
+
             if distance < player_radius + enemy_radius {
                 println!("Enemy hit player! Game Over!");
                 let sound_effect = asset_server.load("audio/explosionCrunch_000.ogg");
