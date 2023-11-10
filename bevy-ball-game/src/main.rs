@@ -1,5 +1,4 @@
-use bevy::audio::*;
-use bevy::{prelude::*, window::PrimaryWindow};
+use bevy::{app::AppExit, audio::*, prelude::*, window::PrimaryWindow};
 use rand::prelude::*;
 
 pub const PLAYER_SIZE: f32 = 64.0; // This is the player sprite size
@@ -36,6 +35,7 @@ fn main() {
                 spawn_stars_over_time,
                 tick_enemy_spawn_timer,
                 spawn_enemies_over_time,
+                exit_game,
             ),
         )
         .run();
@@ -455,5 +455,14 @@ pub fn spawn_enemies_over_time(
                 direction: Vec2::new(random::<f32>(), random::<f32>()).normalize(),
             },
         ));
+    }
+}
+
+pub fn exit_game(
+    keyboard_input: Res<Input<KeyCode>>,
+    mut app_exit_event_writer: EventWriter<AppExit>,
+) {
+    if keyboard_input.just_pressed(KeyCode::Escape) {
+        app_exit_event_writer.send(AppExit);
     }
 }
