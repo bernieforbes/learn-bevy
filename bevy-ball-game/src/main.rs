@@ -342,6 +342,7 @@ pub fn enemy_hit_player(
             let distance = player_transform
                 .translation
                 .distance(enemy_transform.translation);
+
             let player_radius = PLAYER_SIZE / 2.0;
             let enemy_radius = ENEMY_SIZE / 2.0;
 
