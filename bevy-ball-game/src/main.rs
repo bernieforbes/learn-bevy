@@ -189,6 +189,7 @@ pub fn spawn_stars(
     }
 }
 
+// System to control player movement
 pub fn player_movement(
     keyboard_input: Res<Input<KeyCode>>,
     mut player_query: Query<&mut Transform, With<Player>>,
@@ -221,6 +222,7 @@ pub fn player_movement(
     }
 }
 
+// System to make sure player doesn't go out of bounds
 pub fn confine_player_movement(
     mut player_query: Query<&mut Transform, With<Player>>,
     window_query: Query<&Window, With<PrimaryWindow>>,
@@ -253,6 +255,7 @@ pub fn confine_player_movement(
     }
 }
 
+// System to control enemy movement
 pub fn enemy_movement(mut enemy_query: Query<(&mut Transform, &Enemy)>, time: Res<Time>) {
     for (mut transform, enemy) in enemy_query.iter_mut() {
         let direction = Vec3::new(enemy.direction.x, enemy.direction.y, 0.0);
@@ -260,6 +263,7 @@ pub fn enemy_movement(mut enemy_query: Query<(&mut Transform, &Enemy)>, time: Re
     }
 }
 
+// System to change enemy direction when the bounds are hit
 pub fn update_enemy_direction(
     mut commands: Commands,
     mut enemy_query: Query<(&mut Transform, &mut Enemy)>,
