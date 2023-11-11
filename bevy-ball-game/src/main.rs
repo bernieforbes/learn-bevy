@@ -113,6 +113,7 @@ pub struct GameOver {
     pub score: u32,
 }
 
+// System to spawn player
 pub fn spawn_player(
     mut commands: Commands,
     window_query: Query<&Window, With<PrimaryWindow>>,
