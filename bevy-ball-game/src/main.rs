@@ -131,6 +131,7 @@ pub fn spawn_player(
     ));
 }
 
+// System to spawn camera
 pub fn spawn_camera(mut commands: Commands, window_query: Query<&Window, With<PrimaryWindow>>) {
     let window: &Window = window_query.get_single().unwrap();
 
@@ -140,6 +141,7 @@ pub fn spawn_camera(mut commands: Commands, window_query: Query<&Window, With<Pr
     });
 }
 
+// System to spawn enemies
 pub fn spawn_enemies(
     mut commands: Commands,
     window_query: Query<&Window, With<PrimaryWindow>>,
@@ -164,6 +166,7 @@ pub fn spawn_enemies(
     }
 }
 
+// system to spawn stars
 pub fn spawn_stars(
     mut commands: Commands,
     window_query: Query<&Window, With<PrimaryWindow>>,
