@@ -331,6 +331,7 @@ pub fn update_enemy_direction(
     }
 }
 
+// System to stop enmemies going out of bounds
 pub fn confine_enemy_movement(
     mut enemy_query: Query<&mut Transform, With<Enemy>>,
     window_query: Query<&Window, With<PrimaryWindow>>,
@@ -363,6 +364,7 @@ pub fn confine_enemy_movement(
     }
 }
 
+// System to control what happens when an enemy hits the player
 pub fn enemy_hit_player(
     mut commands: Commands,
     mut game_over_event_writer: EventWriter<GameOver>,
@@ -400,6 +402,7 @@ pub fn enemy_hit_player(
     }
 }
 
+// System to control what happens when a player hits a star
 pub fn player_hit_star(
     mut commands: Commands,
     player_query: Query<&Transform, With<Player>>,
