@@ -28,6 +28,7 @@ pub fn spawn_stars(
     }
 }
 
+// system to govern timing of the star spawning
 pub fn tick_star_spawn_timer(mut star_spawn_timer: ResMut<StarSpawnTimer>, time: Res<Time>) {
     star_spawn_timer.timer.tick(time.delta());
 }
