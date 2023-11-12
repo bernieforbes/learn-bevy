@@ -165,6 +165,7 @@ pub fn spawn_enemies_over_time(
     }
 }
 
+// Sytem to update timer for spawning of enemies
 pub fn tick_enemy_spawn_timer(mut enemy_spawn_timer: ResMut<EnemySpawnTimer>, time: Res<Time>) {
     enemy_spawn_timer.timer.tick(time.delta());
 }
