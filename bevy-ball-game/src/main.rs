@@ -1,49 +1,27 @@
-pub mod events;
-mod systems;
+use bevy::prelude::*;
 
 pub mod enemy;
+pub mod events;
 mod player;
 pub mod score;
 pub mod sound;
 pub mod star;
+mod systems;
 
 use events::*;
 use systems::*;
 
-use bevy::prelude::*;
+use enemy::EnemyPlugin;
+use player::PlayerPlugin;
+use score::ScorePlugin;
+use star::StarPlugin;
 
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .init_resource::<Score>()
-        .init_resource::<HighScores>()
-        .init_resource::<StarSpawnTimer>()
-        .init_resource::<EnemySpawnTimer>()
         .add_event::<GameOver>()
-        .add_systems(
-            Startup,
-            (spawn_camera, spawn_player, spawn_enemies, spawn_stars),
-        )
-        .add_systems(
-            Update,
-            (
-                player_movement,
-                confine_player_movement,
-                enemy_movement,
-                // confine_enemy_movement,
-                update_enemy_direction,
-                enemy_hit_player,
-                player_hit_star,
-                update_score,
-                update_high_scores,
-                high_scores_updated,
-                tick_star_spawn_timer,
-                spawn_stars_over_time,
-                tick_enemy_spawn_timer,
-                spawn_enemies_over_time,
-                exit_game,
-                handle_game_over,
-            ),
-        )
+        .add_plugins((EnemyPlugin, PlayerPlugin, ScorePlugin, StarPlugin))
+        .add_systems(Startup, spawn_camera)
+        .add_systems(Update, (exit_game, handle_game_over))
         .run();
 }

@@ -3,8 +3,33 @@ use rand::prelude::*;
 
 use super::components::*;
 use super::resources::*;
-use super::{ENEMY_SIZE, ENEMY_SPEED};
+use super::{ENEMY_SIZE, ENEMY_SPEED, NUMBER_OF_ENEMIES};
 use crate::sound::components::MySound;
+
+// System to spawn enemies
+pub fn spawn_enemies(
+    mut commands: Commands,
+    window_query: Query<&Window, With<PrimaryWindow>>,
+    asset_server: Res<AssetServer>,
+) {
+    let window: &Window = window_query.get_single().unwrap();
+
+    for _ in 0..NUMBER_OF_ENEMIES {
+        let random_x = random::<f32>() * window.width();
+        let random_y = random::<f32>() * window.height();
+
+        commands.spawn((
+            SpriteBundle {
+                transform: Transform::from_xyz(random_x, random_y, 0.0),
+                texture: asset_server.load("sprites/ball_red_large.png"),
+                ..default()
+            },
+            Enemy {
+                direction: Vec2::new(random::<f32>(), random::<f32>()).normalize(),
+            },
+        ));
+    }
+}
 
 // System to control enemy movement
 pub fn enemy_movement(mut enemy_query: Query<(&mut Transform, &Enemy)>, time: Res<Time>) {
