@@ -1,10 +1,13 @@
-pub mod components;
 pub mod events;
-pub mod resources;
 mod systems;
 
+pub mod enemy;
+mod player;
+pub mod score;
+pub mod sound;
+pub mod star;
+
 use events::*;
-use resources::*;
 use systems::*;
 
 use bevy::prelude::*;
