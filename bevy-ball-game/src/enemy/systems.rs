@@ -140,6 +140,7 @@ pub fn confine_enemy_movement(
     }
 }
 
+// System to govern the spawing of enemies throuout the game
 pub fn spawn_enemies_over_time(
     mut commands: Commands,
     window_query: Query<&Window, With<PrimaryWindow>>,
