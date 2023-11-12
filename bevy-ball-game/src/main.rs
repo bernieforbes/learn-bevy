@@ -1,3 +1,8 @@
+mod components;
+mod events;
+mod resources;
+mod systems;
+
 use bevy::{app::AppExit, audio::*, prelude::*, window::PrimaryWindow};
 use rand::prelude::*;
 
@@ -402,7 +407,7 @@ pub fn enemy_hit_player(
     }
 }
 
-// System to control what happens when a player hits a star
+// System to control what happens when a player hits
 pub fn player_hit_star(
     mut commands: Commands,
     player_query: Query<&Transform, With<Player>>,
