@@ -29,6 +29,13 @@ pub fn spawn_player(
     ));
 }
 
+// System to despawn player
+pub fn despawn_player(mut commands: Commands, player_query: Query<Entity, With<Player>>) {
+    if let Ok(player_entity) = player_query.get_single() {
+        commands.entity(player_entity).despawn();
+    }
+}
+
 // System to control player movement
 pub fn player_movement(
     keyboard_input: Res<Input<KeyCode>>,

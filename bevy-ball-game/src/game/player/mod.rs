@@ -11,7 +11,7 @@ pub struct PlayerPlugin;
 
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, spawn_player)
+        app.add_systems(OnEnter(AppState::Game), spawn_player)
             .add_systems(
                 Update,
                 (player_movement, confine_player_movement)
@@ -24,6 +24,8 @@ impl Plugin for PlayerPlugin {
                 (enemy_hit_player, player_hit_star)
                     .run_if(in_state(AppState::Game))
                     .run_if(in_state(SimulationState::Running)),
-            );
+            )
+            // Exit State Systems
+            .add_systems(OnExit(AppState::Game), despawn_player);
     }
 }
