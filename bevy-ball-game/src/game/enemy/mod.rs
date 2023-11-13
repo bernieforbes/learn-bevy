@@ -29,7 +29,9 @@ impl Plugin for EnemyPlugin {
                     confine_enemy_movement,
                     update_enemy_direction,
                     tick_enemy_spawn_timer,
-                    spawn_enemies_over_time,
+                    spawn_enemies_over_time
+                        .run_if(in_state(AppState::Game))
+                        .run_if(in_state(SimulationState::Running)),
                 ),
             )
             // Exit State Systems
