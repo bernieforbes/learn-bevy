@@ -24,6 +24,7 @@ impl Plugin for StarPlugin {
                 (tick_star_spawn_timer, spawn_stars_over_time)
                     .run_if(in_state(AppState::Game))
                     .run_if(in_state(SimulationState::Running)),
-            );
+            )
+            .add_systems(OnExit(AppState::Game), despawn_stars);
     }
 }
