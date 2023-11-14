@@ -8,5 +8,7 @@ pub const BUTTON_STYLE: Style = {
     let mut style = Style::DEFAULT;
     style.width = Val::Px(200.0);
     style.height = Val::Px(80.0);
+    style.justify_content = JustifyContent::Center;
+    style.align_items = AlignItems::Center;
     style
 };
