@@ -14,9 +14,10 @@ fn main() {
     App::new()
         // Bevy Plugins
         .add_plugins(DefaultPlugins)
-        .add_state::<AppState>()
         // My Plugins
         .add_plugins((MainMenuPlugin, GamePlugin))
+        // State
+        .add_state::<AppState>()
         // Startup systems
         .add_systems(Startup, spawn_camera)
         // Systems
