@@ -12,7 +12,7 @@ pub const PAUSE_MENU_STYLE: Style = {
     style.display = Display::Flex; // Hidden by Default
     style.justify_content = JustifyContent::Center;
     style.align_items = AlignItems::Center;
-    style.width = Val::Px(100.0);
+    style.width = Val::Percent(100.0);
     style.height = Val::Percent(100.0);
     style
 };

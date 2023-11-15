@@ -26,6 +26,7 @@ pub fn build_pause_menu(commands: &mut Commands, asset_server: &Res<AssetServer>
             NodeBundle {
                 style: PAUSE_MENU_STYLE,
                 z_index: ZIndex::Local(1), // See Ref. 1
+                // visibility: Visibility::Hidden,
                 ..default()
             },
             PauseMenu {},

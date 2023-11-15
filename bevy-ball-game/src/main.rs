@@ -24,10 +24,10 @@ fn main() {
         .add_systems(
             Update,
             (
-                exit_game,
-                handle_game_over,
                 transition_to_game_state,
                 transition_to_main_menu_state,
+                exit_game,
+                handle_game_over,
             ),
         )
         .run();
