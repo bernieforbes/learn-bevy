@@ -4,6 +4,7 @@ pub mod score;
 pub mod sound;
 pub mod star;
 mod systems;
+mod ui;
 
 use crate::events::GameOver;
 use crate::AppState;
@@ -13,6 +14,7 @@ use player::PlayerPlugin;
 use score::ScorePlugin;
 use star::StarPlugin;
 use systems::*;
+use ui::GameUIPlugin;
 
 pub struct GamePlugin;
 
@@ -22,9 +24,18 @@ impl Plugin for GamePlugin {
             // Events
             .add_event::<GameOver>()
             // Plugins
-            .add_plugins((EnemyPlugin, PlayerPlugin, ScorePlugin, StarPlugin))
+            .add_plugins((
+                EnemyPlugin,
+                PlayerPlugin,
+                ScorePlugin,
+                StarPlugin,
+                GameUIPlugin,
+            ))
             // Systems
-            .add_systems(Update, toggle_simulation.run_if(in_state(AppState::Game)));
+            .add_systems(OnEnter(AppState::Game), pause_simulation)
+            .add_systems(Update, toggle_simulation.run_if(in_state(AppState::Game)))
+            // Exit State Systems
+            .add_systems(OnExit(AppState::Game), resume_simulation);
     }
 }
 
